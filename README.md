@@ -4,6 +4,7 @@
 展示界面：
 ![Clip_2024-08-31_11-36-34](https://github.com/user-attachments/assets/5f3acec9-f4d7-46cf-bfb5-df7d41246cb3)
 另一个主题：
-![Uploading Clip_2024-08-31_11-37-21.png…]()
+![Clip_2024-08-31_11-37-21](https://github.com/user-attachments/assets/b89adc5c-c98b-428e-99e6-1560ed0ffb5d)
+
 
 
