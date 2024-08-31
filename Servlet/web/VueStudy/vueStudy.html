@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生信息管理</title>
+    <script src="vue.js"></script>
+    <script src="axios.js"></script>
+    <script src="jedeliver.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- Default CSS file -->
+    <link id="themeLink" rel="stylesheet" href="vueStudy2.css">
+</head>
+<body>
+<div id="app">
+    <div class="crud">
+        <div class="add" v-show="show1">
+            <h1>添加学生信息</h1>
+            <input type="text" v-model="adata.name" placeholder="姓名"><br>
+            <input type="text" v-model="adata.sex" placeholder="性别"><br>
+            <input type="text" v-model="adata.age" placeholder="年龄"><br>
+            <input type="text" v-model="adata.tel" placeholder="电话"><br>
+            <input type="text" v-model="adata.scores" placeholder="分数"><br>
+            <input type="text" v-model="adata.school" placeholder="学校"><br>
+            <button @click="addData()">添加</button><br><br><br>
+        </div>
+        <div class="update" v-show="show">
+            <h1>修改学生信息</h1>
+            <input type="text" v-model="adata.id" placeholder="学号" readonly><br>
+            <input type="text" v-model="adata.name" placeholder="姓名"><br>
+            <input type="text" v-model="adata.sex" placeholder="性别"><br>
+            <input type="text" v-model="adata.age" placeholder="年龄"><br>
+            <input type="text" v-model="adata.tel" placeholder="电话"><br>
+            <input type="text" v-model="adata.scores" placeholder="分数"><br>
+            <input type="text" v-model="adata.school" placeholder="学校"><br>
+            <button @click="updateOk()">修改</button>
+        </div>
+        <div class="statistics-box">
+            <h2>统计信息</h2>
+            <p>总学生数: {{ totalStudents }}</p>
+            <p>男生: {{ maleStudents }}</p>
+            <p>女生: {{ femaleStudents }}</p>
+            <p>平均成绩: {{ averageScore }}</p>
+            <canvas id="scoreChart"></canvas>
+        </div>
+    </div>
+    <div class="show">
+        <table>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>电话</th>
+                <th>分数</th>
+                <th>学校</th>
+                <th>删除</th>
+                <th>修改</th>
+            </tr>
+            <tr v-for="(value,index) in msg">
+                <td>{{msg[index].id}}</td>
+                <td>{{msg[index].name}}</td>
+                <td>{{msg[index].sex}}</td>
+                <td>{{msg[index].age}}</td>
+                <td>{{msg[index].tel}}</td>
+                <td>{{msg[index].scores}}</td>
+                <td>{{msg[index].school}}</td>
+                <td><button @click="deleteData(index)">删除</button></td>
+                <td><button @click="update(index)">修改</button></td>
+            </tr>
+        </table>
+        <div class="pagination">
+            <button @click="changePage(1)" :disabled="curPage === 1" :class="{ disabled: curPage === 1 }">首页</button>
+            <button @click="changePage(curPage - 1)" :disabled="curPage === 1" :class="{ disabled: curPage === 1 }">上一页</button>
+            <span>{{ curPage }}</span>
+            <button @click="changePage(curPage + 1)" :disabled="curPage === totalPages" :class="{ disabled: curPage === totalPages }">下一页</button>
+            <button @click="changePage(totalPages)" :disabled="curPage === totalPages" :class="{ disabled: curPage === totalPages }">尾页</button>
+            <button @click="toggleTheme()">变化主题</button>
+        </div>
+    </div>
+</div>
+
+
+<script src="vueStudy.js"></script>
+</body>
+</html>

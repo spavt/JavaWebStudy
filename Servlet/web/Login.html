@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #4a90e2, #9013fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login {
+            width: 360px;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #4a90e2;
+            font-size: 24px;
+        }
+
+        .loginForm {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .usernm,
+        .passwd {
+            height: 45px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 0 15px;
+            font-size: 16px;
+        }
+
+        .btn {
+            height: 45px;
+            background-color: #4a90e2;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #357abD;
+        }
+
+        .btn:last-of-type {
+            background-color: #9013fe;
+            margin-top: 10px;
+        }
+
+        .btn:last-of-type:hover {
+            background-color: #7011cd;
+        }
+
+        span {
+            margin: 0px;
+            color: gray;
+            text-align: left;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .verify-container {
+            display: flex;
+            align-items: center;
+        }
+        .verify-container img {
+            cursor: pointer;
+            width: 200px;
+            margin-left: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function ajax1() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let code = document.getElementById("verifyCode").value;
+
+            // 创建XMLHttpRequest对象
+            let xmlHttpRequest = new XMLHttpRequest();
+            // 设置请求方式和地址
+            xmlHttpRequest.open("POST", "/hotWebDesign_war_exploded/islogin", true);
+            xmlHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded", "charset=UTF-8");
+
+            // 监听数据变化
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+                    if (xmlHttpRequest.responseText == "success") {
+                        location.href = "VueStudy/vueStudy.html";
+                        alert("success");
+                    } else {
+                        alert("登录失败");
+                    }
+                }
+            };
+
+            // 发送请求
+            xmlHttpRequest.send("user=" + encodeURIComponent(username) + "&pwd=" + encodeURIComponent(password) + "&code=" + encodeURIComponent(code));
+        }
+    </script>
+    <title>登录</title>
+</head>
+<body>
+<div class="main">
+    <div class="login">
+        <h1>登录</h1>
+        <form class="loginForm" onsubmit="ajax1()">
+            <input type="text" name="user" placeholder="用户名" class="usernm" id="username">
+            <span id="usernameInput"></span><br>
+            <input type="password" name="pwd" placeholder="密码" class="passwd" id="password">
+            <span id="passwordInput"></span><br>
+            <div class="verify-container">
+                <input type="text" name="code" placeholder="验证码" class="usernm" id="verifyCode">
+                <img src="vcode" alt="验证码" onclick="this.src=this.src+'?'+Math.random()">
+            </div><br>
+            <button type="button" class="btn" onclick="ajax1()">登录</button>
+            <a href="register.jsp" class="btn"><span class="resg">注册</span></a>
+        </form>
+    </div>
+</div>
+</body>
+</html>
